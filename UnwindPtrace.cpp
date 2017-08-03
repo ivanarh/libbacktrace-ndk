@@ -18,15 +18,16 @@
 #include <sys/types.h>
 #include <ucontext.h>
 
-#include <libunwind.h>
-#include <libunwind-ptrace.h>
-
 #include <backtrace/Backtrace.h>
 #include <backtrace/BacktraceMap.h>
 
 #include "BacktraceLog.h"
 #include "UnwindMap.h"
 #include "UnwindPtrace.h"
+
+#undef _U
+#include <libunwind.h>
+#include <libunwind-ptrace.h>
 
 UnwindPtrace::UnwindPtrace(pid_t pid, pid_t tid, BacktraceMap* map)
     : BacktracePtrace(pid, tid, map), addr_space_(nullptr), upt_info_(nullptr) {

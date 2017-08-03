@@ -21,13 +21,15 @@
 #include <string>
 
 #define UNW_LOCAL_ONLY
-#include <libunwind.h>
 
 #include <android-base/logging.h>
 #include <backtrace/Backtrace.h>
 
 #include "BacktraceLog.h"
 #include "UnwindCurrent.h"
+
+#undef _U
+#include <libunwind.h>
 
 std::string UnwindCurrent::GetFunctionNameRaw(uintptr_t pc, uintptr_t* offset) {
   if (!initialized_) {

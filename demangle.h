@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,14 @@
  * limitations under the License.
  */
 
-#ifndef _LIBBACKTRACE_BACKTRACE_LOG_H
-#define _LIBBACKTRACE_BACKTRACE_LOG_H
+#ifndef __LIB_DEMANGLE_H_
+#define __LIB_DEMANGLE_H_
 
-#define LOG_TAG "libbacktrace"
+#include <string>
 
-#include <android/log.h>
+// If the name cannot be demangled, the original name will be returned as
+// a std::string. If the name can be demangled, then the demangled name
+// will be returned as a std::string.
+std::string demangle(const char* name);
 
-// Macro to log the function name along with the warning message.
-#define BACK_LOGW(format, ...) \
-  __android_log_print(ANDROID_LOG_WARN, "%s: " format, __PRETTY_FUNCTION__, ##__VA_ARGS__)
-
-#define BACK_LOGE(format, ...) \
-  __android_log_print(ANDROID_LOG_ERROR, "%s: " format, __PRETTY_FUNCTION__, ##__VA_ARGS__)
-
-#endif // _LIBBACKTRACE_BACKTRACE_LOG_H
+#endif  // __LIB_DEMANGLE_H_

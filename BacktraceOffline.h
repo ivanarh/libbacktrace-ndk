@@ -17,7 +17,6 @@
 #ifndef _LIBBACKTRACE_UNWIND_OFFLINE_H
 #define _LIBBACKTRACE_UNWIND_OFFLINE_H
 
-#include <libunwind.h>
 #include <stdint.h>
 #include <sys/types.h>
 #include <ucontext.h>
@@ -26,6 +25,9 @@
 #include <unordered_set>
 
 #include <backtrace/Backtrace.h>
+
+#undef _U
+#include <libunwind.h>
 
 struct Space {
   uint64_t start;

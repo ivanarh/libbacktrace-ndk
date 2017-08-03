@@ -22,12 +22,16 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include <log/log.h>
+#include <android-base/log_main.h>
 
 #include <backtrace/backtrace_constants.h>
 #include <backtrace/BacktraceMap.h>
 
 #include "thread_utils.h"
+
+#ifndef SCNx64
+#define	SCNx64			"llx"		/* uint64_t */
+#endif
 
 BacktraceMap::BacktraceMap(pid_t pid) : pid_(pid) {
   if (pid_ < 0) {

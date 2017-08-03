@@ -30,6 +30,13 @@
 #include "BacktracePtrace.h"
 #include "thread_utils.h"
 
+#ifndef MIN
+#define MIN(a,b) \
+   ({ __typeof__ (a) _a = (a); \
+       __typeof__ (b) _b = (b); \
+     _a < _b ? _a : _b; })
+#endif
+
 #if !defined(__APPLE__)
 static bool PtraceRead(pid_t tid, uintptr_t addr, word_t* out_value) {
   // ptrace() returns -1 and sets errno when the operation fails.

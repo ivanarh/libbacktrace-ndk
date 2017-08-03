@@ -21,8 +21,10 @@
 #include <sys/param.h>
 #include <sys/ptrace.h>
 #include <sys/types.h>
+#include <sys/syscall.h>
 #include <ucontext.h>
 #include <unistd.h>
+#include <libgen.h>
 
 #include <stdlib.h>
 
@@ -35,6 +37,13 @@
 #include "BacktraceLog.h"
 #include "ThreadEntry.h"
 #include "thread_utils.h"
+
+#ifndef MIN
+#define MIN(a,b) \
+   ({ __typeof__ (a) _a = (a); \
+       __typeof__ (b) _b = (b); \
+     _a < _b ? _a : _b; })
+#endif
 
 bool BacktraceCurrent::ReadWord(uintptr_t ptr, word_t* out_value) {
   if (!VerifyReadWordArgs(ptr, out_value)) {
@@ -166,7 +175,7 @@ bool BacktraceCurrent::UnwindThread(size_t num_ignore_frames) {
     return false;
   }
 
-  if (tgkill(Pid(), Tid(), THREAD_SIGNAL) != 0) {
+  if (syscall(__NR_tgkill, Pid(), Tid(), THREAD_SIGNAL) != 0) {
     // Do not emit an error message, this might be expected. Set the
     // error and let the caller decide.
     if (errno == ESRCH) {
@@ -216,7 +225,7 @@ bool BacktraceCurrent::UnwindThread(size_t num_ignore_frames) {
     }
   } else {
     // Check to see if the thread has disappeared.
-    if (tgkill(Pid(), Tid(), 0) == -1 && errno == ESRCH) {
+    if (syscall(__NR_tgkill, Pid(), Tid(), 0) == -1 && errno == ESRCH) {
       error_ = BACKTRACE_UNWIND_ERROR_THREAD_DOESNT_EXIST;
     } else {
       error_ = BACKTRACE_UNWIND_ERROR_THREAD_TIMEOUT;

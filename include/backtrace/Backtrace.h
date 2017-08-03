@@ -26,6 +26,14 @@
 #include <backtrace/backtrace_constants.h>
 #include <backtrace/BacktraceMap.h>
 
+#ifndef PRIxPTR
+#define	PRIxPTR			"x"		/* uintptr_t */
+#endif
+
+#ifndef PRIuPTR
+#define	PRIuPTR			"u"		/* uintptr_t */
+#endif
+
 #if __LP64__
 #define PRIPTR "016" PRIxPTR
 typedef uint64_t word_t;

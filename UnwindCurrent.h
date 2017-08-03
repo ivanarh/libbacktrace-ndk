@@ -29,6 +29,7 @@
 #include "BacktraceCurrent.h"
 
 #define UNW_LOCAL_ONLY
+#undef _U
 #include <libunwind.h>
 
 class UnwindCurrent : public BacktraceCurrent {

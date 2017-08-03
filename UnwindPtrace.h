@@ -25,9 +25,11 @@
 #ifdef UNW_LOCAL_ONLY
 #undef UNW_LOCAL_ONLY
 #endif
-#include <libunwind.h>
 
 #include "BacktracePtrace.h"
+
+#undef _U
+#include <libunwind.h>
 
 class UnwindPtrace : public BacktracePtrace {
  public:

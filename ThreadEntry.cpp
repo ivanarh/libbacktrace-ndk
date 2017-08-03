@@ -36,7 +36,7 @@ ThreadEntry::ThreadEntry(pid_t pid, pid_t tid)
       next_(ThreadEntry::list_), prev_(nullptr) {
   pthread_condattr_t attr;
   pthread_condattr_init(&attr);
-  pthread_condattr_setclock(&attr, CLOCK_MONOTONIC);
+//  pthread_condattr_setclock(&attr, CLOCK_MONOTONIC);
   pthread_cond_init(&wait_cond_, &attr);
 
   // Add ourselves to the list.

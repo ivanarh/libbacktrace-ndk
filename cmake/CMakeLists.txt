@@ -14,6 +14,11 @@ file(GLOB BACKTRACE_SOURCES
     ${BACKTRACE_ROOT}/UnwindCurrent.cpp
     ${BACKTRACE_ROOT}/UnwindMap.cpp
     ${BACKTRACE_ROOT}/UnwindPtrace.cpp
+    ${BACKTRACE_ROOT}/BacktraceMap.cpp
+    ${BACKTRACE_ROOT}/android-base/stringprintf.cpp
+    ${BACKTRACE_ROOT}/android-base/logging.cpp
+    ${BACKTRACE_ROOT}/demangle.cpp
+    ${BACKTRACE_ROOT}/getline.c
 )
 
 add_library(backtrace STATIC ${BACKTRACE_SOURCES})

@@ -23,6 +23,10 @@
 
 #include <backtrace/Backtrace.h>
 
+#ifndef __SIGRTMIN
+#define __SIGRTMIN 32
+#endif
+
 // The signal used to cause a thread to dump the stack.
 #if defined(__GLIBC__)
 // In order to run the backtrace_tests on the host, we can't use

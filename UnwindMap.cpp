@@ -22,10 +22,11 @@
 
 #include <backtrace/BacktraceMap.h>
 
-#include <libunwind.h>
-
 #include "BacktraceLog.h"
 #include "UnwindMap.h"
+
+#undef _U
+#include <libunwind.h>
 
 //-------------------------------------------------------------------------
 // libunwind has a single shared address space for the current process

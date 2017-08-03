@@ -23,6 +23,9 @@
 
 #include <backtrace/BacktraceMap.h>
 
+#undef _U
+#include <libunwind.h>
+
 // The unw_map_cursor_t structure is different depending on whether it is
 // the local or remote version. In order to get the correct version, include
 // libunwind.h first then this header.
