@@ -1,0 +1,3 @@
+[submodule "libunwind"]
+	path = libunwind
+	url = git@github.com:ivanarh/libunwind-ndk.git
